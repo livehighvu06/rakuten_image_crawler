@@ -1,15 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-import pathlib
 import csv
-
+path = os.getcwd() 
 # 路徑
-path = pathlib.Path(__file__).parent.absolute()
-print(path)
 
 # 建立images資料夾(已經有的話會發生錯誤)
-# imagesFile = os.mkdir(f'{path}\images')
+imagesFile = os.mkdir(f'{path}\images')
 
 # 設定UTF-8-sig 去除\ufeff
 file = open(f'{path}\img.csv',encoding='UTF-8-sig')
@@ -30,7 +27,7 @@ for d in data:
         s = soup.find(class_='rakutenLimitedId_ImageMain1-3')
         img = s.select('img')
         img = img[0]['src'].split('?')[0]
-        
+
         # 取番號作為檔名
         fileTitle = d[0].strip().split('/')
         # 清除回傳串列裡的空字串
