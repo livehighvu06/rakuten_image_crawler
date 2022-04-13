@@ -2,11 +2,22 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import csv
-path = os.getcwd() 
-# 路徑
+import pyautogui
+import random
 
-# 建立images資料夾(已經有的話會發生錯誤)
-imagesFile = os.mkdir(f'{path}\images')
+# 幹話
+num = random.randrange(11111111, 99999999)
+text = [f'謝謝老闆,此次收費  {num}  元> <','您撥的電話通話中 , 請稍後','我看你是很想下班喔','偷偷跟你說...']
+textLen = len(text) -1
+randomNum = random.randrange(0, textLen)
+
+
+# 路徑
+path = os.getcwd() 
+print(f'{path}\images')
+# 建立images資料夾 / 確認當前目錄是否有資料夾
+if not os.path.isdir(f'{path}\images'):
+    imagesFile = os.mkdir(f'{path}\images')
 
 # 設定UTF-8-sig 去除\ufeff
 file = open(f'{path}\img.csv',encoding='UTF-8-sig')
@@ -34,12 +45,20 @@ for d in data:
         test = [i.strip() for i in fileTitle if i.strip()!='']
         fileTitle = test[-1]
         print(fileTitle)
-
+        print(d[0])
         # 下載圖片
         f = open(f'{path}\images\{fileTitle}.jpg','wb')
         response = requests.get(img)
         f.write(response.content)
         f.close()
-        
+     
     except:
+        # 輸出錯誤
+        f = open(f'error_list.txt','a')
+        link = d[0] + '\n'
+        f.write(link)
+        f.close()
         print(f"{fileTitle} : 下載失敗")
+
+# 彈出金句視窗
+pyautogui.alert(f'{text[randomNum]}')
