@@ -7,7 +7,7 @@ import random
 
 # 幹話
 num = random.randrange(11111111, 99999999)
-text = [f'謝謝老闆,此次收費  {num}  元> <','您撥的電話通話中 , 請稍後','我看你是很想下班喔','偷偷跟你說...']
+text = [f'謝謝老闆,此次收費  {num}  元> <','我看你是很想下班喔','努力不一定會成功 , 但不努力會很輕鬆喔','實用小知識 : 北投下一站是新北投','Sarah:當全世界都不要你的時候 記得還有我 我也不要你','偷偷跟你說 可不可中杯比較好喝','人生就是起起 落落落落落','實用小知識 : Share的本名叫林郁萱']
 textLen = len(text) -1
 randomNum = random.randrange(0, textLen)
 
@@ -58,7 +58,6 @@ for d in data:
         link = d[0] + '\n'
         f.write(link)
         f.close()
-        print(f"{fileTitle} : 下載失敗")
 
 # 彈出金句視窗
 pyautogui.alert(f'{text[randomNum]}')
