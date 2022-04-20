@@ -34,9 +34,16 @@ for d in data:
     try:
         r = requests.get(d[0], headers = headers)
         soup = BeautifulSoup(r.text, "html.parser")
-       
-        s = soup.find(class_='rakutenLimitedId_ImageMain1-3')
-        img = s.select('img')
+        print(d[0])
+        if('item.rakuten.co.jp' in d[0]):
+            # print('樂天')
+            s = soup.find(class_='rakutenLimitedId_ImageMain1-3')
+            img = s.select('img')
+        elif ('paypaymall.yahoo.co.jp' in d[0]):
+            # print('PayPay')
+            s = soup.find(class_='ItemImage')
+            img = s.select('amp-img')
+
         img = img[0]['src'].split('?')[0]
 
         # 取番號作為檔名
